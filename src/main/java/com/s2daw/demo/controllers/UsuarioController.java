@@ -3,10 +3,8 @@ package com.s2daw.demo.controllers;
 import com.s2daw.demo.dao.UsuarioDao;
 import com.s2daw.demo.models.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,10 +24,16 @@ public class UsuarioController {
         usuario.setTelefono("632656889");
         return usuario;
     }
+    @RequestMapping(value="api/usuario" , method = RequestMethod.POST)
+    public void registrarUsuario(@RequestBody Usuario usuario) {
+         usuarioDao.registrar(usuario);
+    }
+
     @RequestMapping(value="api/usuario")
     public List<Usuario> getUsuario() {
         return usuarioDao.getUsuarios();
     }
+
     @RequestMapping(value="usuario11") //esto es un URL
     public Usuario editar(){
         Usuario usuario = new Usuario();
