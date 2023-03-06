@@ -5,6 +5,10 @@ $(document).ready(function() {
 
 });
 
+function actualizarEmailDelUsuario(){
+    document.getElementById('txt-email-usuario').outerHTML = localStorage.email;
+}
+
 async function cargaUsuario() {
     const request = await fetch('api/usuarios', {
         method: 'GET',
@@ -16,7 +20,6 @@ async function cargaUsuario() {
     let listadoHTML = '';
     for (let usuario of usuarios) {
         let botonEliminar = '<a href="#" onclick="eliminarUsuario(' + usuario.id + ')" class="btn btn-danger btn-circle btn-sm"> <i class="fas fa-trash"></i></a>';
-
         let telefonoTexto = usuario.telefono == null ? '-' : usuario.telefono;
         let usuarioHTML = '<tr><td>' + usuario.id + '</td><td>' + usuario.nombre + ' ' + usuario.apellido + '</td><td>' + usuario.email + '</td><td>'
             + usuario.telefonoTexto + '</td><td>' + botonEliminar + '</td></tr>'
